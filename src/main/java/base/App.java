@@ -37,6 +37,51 @@ public class App {
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        
+        App myApp = new App();
+        int prince = myApp.principal();
+        double rate = myApp.interestRate();
+        double percent = myApp.percentage(rate);
+        double interest = myApp.principalInterest(prince, percent);
+        int years = myApp.yearlyInterest();
+        double calc = Math.round((interest * years) + prince);
+        String invest = Double.toString(calc);
+        if(calc % 1 == 0) {
+            invest = String.format("%.0f", calc);
+        }
+        String outputString = myApp.generateOutputString(rate, years, invest);
+        myApp.printOutput(outputString);
+    }
+
+    public void printOutput(String outputString) {
+        System.out.println(outputString);
+    }
+
+    public int principal() {
+        System.out.println("Enter the principal: ");
+        return in.nextInt();
+    }
+
+    public double interestRate() {
+        System.out.println("Enter the rate of interest: ");
+        return in.nextDouble();
+    }
+
+    public int yearlyInterest() {
+        System.out.println("Enter the number of years: ");
+        return in.nextInt();
+    }
+
+    public double percentage(double rate) {
+        return (rate / 100);
+    }
+
+    public double principalInterest(int prince, double percent) {
+        return prince * percent;
+    }
+
+
+
+    public String generateOutputString(double rate, int years, String invest) {
+        return "After " + years + " years at " + rate + "%, the investment will be worth $" + invest + ".";
     }
 }
